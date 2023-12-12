@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <jcr:root 
+                xmlns:sling="http://sling.apache.org/jcr/sling/1.0" 
+                xmlns:cq="http://www.day.com/jcr/cq/1.0" 
+                xmlns:jcr="http://www.jcp.org/jcr/1.0" 
+                xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="New Banner blog"
+                sling:resourceType="cq/gui/components/authoring/dialog">
+                <content jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                        <items jcr:primaryType="nt:unstructured">
+                                <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                                <ImageDesktop
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                        fieldLabel="Background blog"
+                                                        name="./imgHead"
+                                                        rootPath="/content/dam"
+                                                        xtype="pathfield"/>
+                                                <ImageAlt 
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                        fieldLabel="Image alt"
+                                                        name="./imgAlt"
+                                                        xtype="text"/>
+                                                <!-- <blogBreadcrum jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"
+                                                        fieldDescription="Ingrese el breadcrum"
+                                                        fieldLabel="Breadcrum"
+                                                        roothPath ="/content"
+                                                        name="./blogBreadcrum"
+                                                        xtype="pathfield"/> -->
+                                                <blogEneltitle jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                        fieldDescription="Insert title"
+                                                        fieldLabel="Title"
+                                                        name="./blogEneltitle"
+                                                        xtype="title"/>
+                                                <!-- <tiempoLectura
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                        fieldDescription="Ingresa los datos para el tiempo de lectura"
+                                                        fieldLabel="Tiempo de lectura"
+                                                        name="./tiempoLectura"
+                                                        xtype="title"/> -->
+                                                <!-- <linkTarget
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/switch"
+                                                        fieldLabel="Abrir enlace en una ventana nueva?"
+                                                        name="./linkTarget"
+                                                        uncheckedValue="{Boolean}false"
+                                                        value="{Boolean}true"/> -->
+                                                <!-- <datepicker 
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                                        emptyText="Fecha"
+                                                        displayedFormat="MM-DD-YYYY"
+                                                        fieldLabel="Fecha"
+                                                        name="./datepicker"
+                                                        type="date"/> -->
+                                                <!-- <htmlCode jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                                        fieldDescription="Ingrese codigo HTML"
+                                                        fieldLabel="HTML Code"
+                                                        name="./htmlCode"
+                                                        xtype="textarea"/> -->
+                                        </items>
+                                </column>
+                        </items>        
+                </content>
+        </jcr:root>
