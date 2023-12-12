@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    xmlns:cq="http://www.day.com/jcr/cq/1.0"
+    xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	jcr:primaryType="nt:unstructured"
+	jcr:title="Configurator Lite Dialog"
+	sling:resourceType="cq/gui/components/authoring/dialog"
+	extraClientlibs="[dialog.utils.mode-switch.select]"
+    xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	helpPath="https://virtuelle-welt.atlassian.net/wiki/spaces/MINI/pages/3168698719">
+    <content jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/tabs">
+                <items jcr:primaryType="nt:unstructured">
+                    <mainTab jcr:primaryType="nt:unstructured" jcr:title="General" sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns" margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <column jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <showCompare
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                        text="Show Compare Button"
+                                        fieldDescription="Determines if the compare button will be shown"
+                                        required="{Boolean}false"
+                                        uncheckedValue="{Boolean}false"
+                                        value="{String}true"
+                                        name="./showCompare" />
+                                    <comparePage
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Compare Page URL"
+                                        required="{Boolean}false"
+                                        name="./comparePage"
+                                        fieldDescription="URL destination for the CTA" />
+
+
+                                    <heading
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Heading" required="{Boolean}true"
+                                        name="./heading" />
+                                    <subHeading
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Subheading" required="{Boolean}true"
+                                        name="./subHeading" />
+                                    <comparePageCtaText
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Compare Page CTA text"
+                                        required="{Boolean}true"
+                                        name="./comparePageCtaText" />
+                                    <featuresTitleText
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Features Title Text"
+                                        required="{Boolean}true"
+                                        name="./featuresTitleText" />
+                                </items>
+                            </column>
+                        </items>
+                    </mainTab>
+
+                    <vehicleContentTab jcr:primaryType="nt:unstructured" jcr:title="Vehicle Content" sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns" margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <column jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+
+                                    <vehiclesData
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                        fieldDescription="List of images shown for the interior view of the vehicle"
+                                        composite="{Boolean}true"
+                                        fieldLabel="Vehicle's data (Click + to add a vehicle data)">
+                                        <field
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                                            name="./multiVehiclesData">
+                                            <items
+                                                jcr:primaryType="nt:unstructured">
+                                                <vehicleModel
+                                                    jcr:primaryType="nt:unstructured"
+                                                    fieldDescription="Vehicle Model"
+                                                    fieldLabel="Vehicle Model"
+                                                    name="./vehicleModel"
+                                                    sling:resourceType="granite/ui/components/foundation/form/select">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <convertible jcr:primaryType="nt:unstructured" text="Convertible" value="Convertible" />
+                                                        <miniElectric jcr:primaryType="nt:unstructured" text="Mini Electric" value="MINI Cooper SE" />
+                                                        <countryman jcr:primaryType="nt:unstructured" text="Countryman" value="Countryman" />
+                                                        <hardtopTwoDoor jcr:primaryType="nt:unstructured" text="Hardtop 2 Door" value="Hardtop 2 Door" />
+                                                        <hardtopFourDoor jcr:primaryType="nt:unstructured" text="Hardtop 4 Door" value="Hardtop 4 Door" />
+                                                        <clubman jcr:primaryType="nt:unstructured" text="Clubman" value="Clubman" />
+                                                    </items>
+                                                </vehicleModel>
+
+                                                <exteriorImage
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldLabel="Exterior Image"
+                                                    fieldDescription="Vehicle image shown to the user for exterior view"
+                                                    required="{Boolean}true"
+                                                    multiple="{Boolean}false"
+                                                    name="./exteriorImage"
+                                                    rootPath="/content/dam/global-assets" />
+                                                <exteriorImageMobile
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldLabel="Exterior Image Mobile"
+                                                    fieldDescription="Vehicle image shown to the user for exterior view on mobile screens" required="{Boolean}true"
+                                                    multiple="{Boolean}false"
+                                                    name="./exteriorImageMobile"
+                                                    rootPath="/content/dam/global-assets" />
+                                                <exteriorVideo
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldLabel="Exterior Video"
+                                                    fieldDescription="Video shown to the user for exterior view"
+                                                    required="{Boolean}false"
+                                                    multiple="{Boolean}false"
+                                                    name="./exteriorVideo"
+                                                    rootPath="/content/dam/global-assets" />
+                                                <exteriorVideoMobile
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldLabel="Exterior Video Mobile"
+                                                    fieldDescription="Video shown to the user for exterior view on mobile screens"
+                                                    required="{Boolean}false"
+                                                    multiple="{Boolean}false"
+                                                    name="./exteriorVideoMobile"
+                                                    rootPath="/content/dam/global-assets" />
+                                                <showPrice
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    text="Show price"
+                                                    fieldDescription="Determines if the vehicle price will be shown for this vehicle"
+                                                    required="{Boolean}false"
+                                                    uncheckedValue="{Boolean}false"
+                                                    value="{String}true"
+                                                    name="./showPrice" />
+                                                <vehicleFeatures
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                    fieldDescription="List of vehicle features shown in the component square inside"
+                                                    composite="{Boolean}true"
+                                                    fieldLabel="Features (Click + to add a new feature text)">
+                                                    <field
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                        name="./vehicleFeaturesData">
+                                                        <items
+                                                            jcr:primaryType="nt:unstructured">
+                                                            <text
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                                fieldLabel="Feature"
+                                                                required="{Boolean}true"
+                                                                name="./text" />
+                                                        </items>
+                                                    </field>
+                                                </vehicleFeatures>
+                                                <marketingText
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                    fieldLabel="Marketing Text"
+                                                    required="{Boolean}false"
+                                                    name="./marketingText"
+                                                    fieldDescription="Leave blank to use the marketing text that comes from the service. Add text here to override it." />
+                                                <interiorImages
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                    fieldDescription="List of images shown for the interior view of the vehicle"
+                                                    composite="{Boolean}true"
+                                                    fieldLabel="Interior Images (Click + to add a new interior image resource)">
+                                                    <field
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                        name="./multiImagesData">
+                                                        <items
+                                                            jcr:primaryType="nt:unstructured">
+                                                            <resourcePath jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                                fieldLabel="Image resource"
+                                                                required="{Boolean}true" rootPath="/content/dam/global-assets"
+                                                                name="./path" />
+                                                        </items>
+                                                    </field>
+                                                </interiorImages>
+                                            </items>
+                                        </field>
+                                    </vehiclesData>
+                                </items>
+                            </column>
+                        </items>
+                    </vehicleContentTab>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

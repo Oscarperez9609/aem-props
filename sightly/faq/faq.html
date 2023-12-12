@@ -1,0 +1,52 @@
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"
+   data-sly-use.placeholder="/apps/miniusa/components/templates/placeholder.html">
+</sly>
+ui.apps/src/main/content/jcr_root/apps/miniusa/components/copy/faq/faq.html
+<!--/* Placeholder */-->
+<sly data-sly-call="${placeholder.placeholder @ isEmpty=wcmmode.edit, emptyTextAppend='Component - Click to edit'}"></sly>
+
+<!--/* Clientlib CSS */-->
+<sly data-sly-call="${clientLib.css @ categories='miniusa.components.copy.faq'}"></sly>
+
+<sly data-sly-use.faqDetails="com.miniusa.core.models.sling.components.faq.FAQModel">
+   <sly data-sly-test.border="${faqDetails.border == 'on' ? 'no-border' : ''}" ></sly>
+
+      <div class="faq-element-wrapper ${properties.variantSelector}">
+         <div class="faq--wrapper-media">
+            <h3 class="faq--title t-headline3">${properties.title @ context='unsafe'}</h3>
+            <picture class="faq__wrapper-image" data-sly-test="${properties.mobileImage}">
+               <source media="(max-width: 767px)" srcset="${properties.mobileImage}" style="aspect-ratio: 9/16;"/>
+               <source media="(min-width: 768px) and (max-width: 1279px)" srcset="${properties.tabletImage}" style="aspect-ratio: 3/2;"/>
+               <source media="(min-width: 1280px) and (max-width: 2000px)" srcset="${properties.desktopImage}" style="aspect-ratio: 16/7;"/>
+               <source media="(min-width: 2000px)" srcset="${properties.screenImage}" style="aspect-ratio: 9/16;"/>
+               <img src="${properties.mobileImage}" alt="${properties.altText}"
+               />
+            </picture>
+            <video class="faq-video" data-sly-test="${properties.video}">
+               <source src="${properties.video}" type="video/mp4">
+            </video>
+         </div>
+         <div class="faq--wrapper-info">
+            <span data-sly-test="${properties.eyebrow}" class="faq--eyebrow t-eyebrow1">${properties.eyebrow @ context='unsafe'}</span>
+            </sly>
+            <sly data-sly-list.faq="${faqDetails.faqList}">
+               <div id="${faq.faqid}" data-id="${faq.faqid}" class="${border} faq-element">
+                  <div class="question-wrapper">
+                     <div class="question-wrapper-title">
+                        <span data-sly-test="${faq.icon}" class="faq-icon ${faq.icon}"></span>
+                        <h3 class="question t-headline6">${faq.question}</h3>
+                     </div>
+                     <span class="arrow icon-border-circled"></span>
+                  </div>
+                  <div class="answer">
+                     <span class="t-content2">${faq.answer @ context='unsafe'}</p>
+                  </div>
+               </div>
+            </sly>
+         </div>
+      </div>
+</sly>
+
+
+<!--/* Clientlib JS */-->
+<sly data-sly-call="${clientLib.js @ categories='miniusa.components.copy.faq'}"></sly>

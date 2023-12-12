@@ -1,0 +1,917 @@
+@import "variables";
+@import "functions";
+@import "typography";
+
+.configuratorLite{
+  position:relative;
+}
+
+.configurator-lite-carousel{
+  position:absolute;
+  top:0;
+  left:0;
+  z-index: 1;
+  width:100%;
+  height:100%;
+  overflow: hidden;
+
+  &__image-container{
+
+    width: 100%;
+    height:100%;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style:none;
+
+    &::-webkit-scrollbar{
+      width:0;
+      height:0;
+    }
+
+  }
+
+  &__slide{
+    width: 100%;
+    height: 100%;
+    flex: 1 0 100%;
+    position:relative;
+  }
+
+  &__image{
+    width:100%;
+  }
+
+  &.hidden {
+    display: none;
+    opacity: 0;
+  }
+
+}
+
+.configurator-lite {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: palette(white,base);
+  padding: 0 0 60px 0;
+  overflow-x: clip;
+  $configuratorLite:&;
+  &#{&}--interior-mode{
+
+
+    #{$configuratorLite}{
+      &-content{
+        background:transparent;
+
+        &__interaction-area,&__interaction-area--desktop{
+          display:none;
+        }
+
+        &__vehicle-details{
+          margin-top:384px;
+        }
+
+        &__background-video{
+          display: none;
+          position:relative;
+          width:auto;
+          height:auto;
+          z-index: 1;
+
+        }
+
+        .vehicle-details-container {
+
+          .vehicle-detail-heading {
+            color: palette(white, base);
+          }
+
+        }
+
+        &__cta-container {
+
+
+          .search-inventory-cta {
+            background: palette(white, base);
+            border-color: palette(white, base);
+            color: palette(black, base);
+
+            &:hover {
+              color: palette(white, base);
+              background: transparent;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  &#{&}--after-interaction-mode{
+
+    background:palette(white,base);
+
+    #{$configuratorLite}{
+
+
+      &-header--desktop {
+        display:none;
+      }
+
+      &-content{
+
+        &__vehicle-features{
+          display:block;
+        }
+
+        &__vehicle-details {
+          margin-top:15px;
+        }
+
+        &__vehicle-view-toggle{
+          display:none;
+        }
+
+
+        &__background-video{
+          display: block;
+          margin-top:15px;
+        }
+
+
+      }
+    }
+  }
+
+
+
+  a {
+    border: 2px solid;
+    text-decoration: none;
+    text-transform: uppercase;
+    font: 400 15px $minisansbold;
+    letter-spacing: 0.07em;
+    line-height: 20px;
+    padding: 11px 20px 9px 20px;
+    transition: all .25s ease-in-out;
+  }
+
+  .nav-button {
+    padding: 0;
+    font: 400 11px $minisans;
+    letter-spacing: 2.75px;
+    color: palette(interface, tundora);
+    text-transform: uppercase;
+    background: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 8px solid transparent;
+    border-left: none;
+    white-space: nowrap;
+    padding: 25px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  &-header--desktop {
+    display:none;
+  }
+
+  &-header--mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    padding: 65px 45px 20px 45px;
+    background-color:palette(white,base);
+    .heading-1 {
+      font: 400 12px $minisans;
+      color: palette(interface, boulder);
+      letter-spacing: 2.75px;
+      text-transform: uppercase;
+    }
+
+    .sub-heading {
+      font: 400 30px $miniserif;
+      color: palette(black, base);
+    }
+  }
+
+  &-nav {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    backdrop-filter: blur(5px);
+    background-color: rgba(255,255,255,0.7);//
+
+    &__content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+
+      nav {
+        display: flex;
+        width: 100%;
+
+        ul {
+          display: flex;
+          margin: 0;
+          padding: 0;
+          overflow-x: auto;
+          scrollbar-width: none;
+          width: 100%;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          li {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+            border-right: 1px solid palette(interface, mercury);
+          }
+        }
+      }
+
+      a {
+        display: none;
+      }
+    }
+
+    &__cta {
+      width:100%;
+      display:block;
+      background-color: transparent;
+      border: solid 1px black;
+      text-transform: uppercase;
+      font-family: $miniserif;
+      font-size:16px;
+    }
+
+  }
+
+  // Holds the carousel, nav and content on mobile only.
+  &-content-wrapper{
+    position:relative;
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: palette(white,base);
+    z-index:2;
+    position:relative;
+    width:100%;
+    $grandparent:&;
+
+
+    &#{$grandparent}--transparent{
+      background: transparent;
+    }
+
+    &__carousel-prev-button,&__carousel-next-button{
+      position:absolute;
+      height:100%;
+      top:0;
+      background-color: transparent;
+      cursor:pointer;
+      color:white;
+      border:none;
+
+      #{$grandparent}__icon-border{
+        width: 35px;
+        height: 35px;
+      }
+
+      #{$grandparent}__icon {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        right: 0;
+        left: 0;
+        font-size: 1em;
+        -ms-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform:translateY(-50%);
+        transform: translateY(-50%);
+        text-align: center;
+        letter-spacing: 0;
+      }
+    }
+
+
+    &__carousel-prev-button{
+      left:3%;
+    }
+
+    &__carousel-next-button{
+      right:3%;
+    }
+
+    &__interaction-area,&__interaction-area--desktop{
+
+      background-color: transparent;
+      position: absolute;
+      margin: 0 auto;
+      top: 50%;
+      right: 0;
+      left: 0;
+      width: 80%;
+      z-index: 2;
+      transform: translateY(-50%);
+      text-align: center;
+      cursor:pointer;
+    }
+
+    &__interaction-area{
+      height: 100%;
+    }
+    &__interaction-area--desktop{
+      height: 70%;
+      left:10%;
+      right:auto;
+      width:60%;
+      display:none;
+    }
+
+    &__vehicle-features {
+      width: mini-grid-col(21);
+      background-color:rgba(241, 241, 241, 0.5);
+      padding:18px;
+      backdrop-filter: blur(10px);
+      display:none;
+      margin:25px auto 0 auto;
+
+      &__title {
+        text-align: center;
+        font-size: .625rem;
+        padding:0;
+        color:palette(interface,boulder);
+      }
+    }
+
+    &__vehicle-features-list {
+      display:flex;
+      flex-direction: column;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      list-style: none;
+      padding:0;
+      margin:15px 0 0 0;
+    }
+
+    &__vehicle-feature {
+      width: 100%;
+      display:flex;
+      justify-content: center;
+      &__content {
+        display: flex;
+        flex-direction: column;
+        &__text{
+          flex: 1 0 auto;
+          padding:0;
+          text-align: center;
+          font-size: .875rem;
+          color: palette(interface,black);
+        }
+      }
+    }
+
+    &__background-video{
+      display: block;
+      position:relative;
+      width:auto;
+      height:auto;
+      z-index: 1;
+      margin-top:30px;
+
+    }
+
+    &__background-video-wrapper{
+      text-align:center;
+      height:auto;
+      position:relative;
+      display:block;
+    }
+
+    &__video{
+      display:none;
+      position: relative;
+      width: 100%;
+      object-fit: cover;
+      height: auto;
+    }
+
+    &__video--mobile{
+      position: relative;
+      width: 100%;
+      object-fit: cover;
+      height: auto;
+    }
+
+
+    &__vehicle-view-toggle{
+      $parent:&;
+
+      #{$grandparent}__toggle-button-text{
+        width:100%;
+        text-align:center;
+        font-size: 14px;
+        color:palette(black,base);
+      }
+
+      &#{&}--light{
+        border:solid 1px palette(white,base);
+        #{$grandparent}__toggle-slider{
+          background-color:palette(white,base);
+        }
+
+        #{$grandparent}__toggle-button-text{
+          color:palette(white,base);
+        }
+
+        #{$grandparent}__toggle-button--selected{
+          #{$grandparent}__toggle-button-text{
+            color:palette(black,base);
+          }
+        }
+      }
+
+      &#{&}--dark{
+        border:solid 1px palette(black,base);
+        #{$grandparent}__toggle-slider{
+          background-color:palette(black,base);
+        }
+
+        #{$grandparent}__toggle-button-text{
+          color:palette(black,base);
+        }
+
+        #{$grandparent}__toggle-button--selected{
+          #{$grandparent}__toggle-button-text{
+            color:palette(white,base);
+          }
+        }
+      }
+
+      position:relative;
+      width:70%;
+      display:block;
+      margin:25px auto 0 auto;
+      display:flex;
+      flex-wrap: nowrap;
+      padding:2px;
+      border-radius: 40px;
+      background-color:transparent;
+      cursor: pointer;
+
+      @include breakpoint-min($grid-width-large) {
+        order:5;
+        width:20%;
+      }
+
+    }
+
+    &__toggle-button{
+      padding:8px;
+      display:block;
+      text-transform:capitalize;
+      border:none;
+      position:relative;
+      border-radius: 40px;
+      width:50%;
+      background-color: transparent;
+      cursor:pointer;
+    }
+
+    &__toggle-slider{
+      border-radius:40px;
+      width:50%;
+      height:100%;
+      position:absolute;
+      top:0;
+      left:0;
+
+      transition: left .4s;
+      -moz-transition: left .4s;
+      -ms-transition: left .4s;
+      -webkit-transition: left .4s;
+      -o-transition: left .4s;
+    }
+
+
+    &__vehicle-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      display:block;
+      margin:30px auto 0 auto;
+      width: mini-grid-col(17);
+
+
+      .vehicle-details-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 10px;
+        color: palette(black, base);
+
+        &.vehicle-details-container--light{
+          color: palette(white, base);
+        }
+
+        .vehicle-detail-heading {
+          font: 400 14px $minisans;
+          color:palette(interface,boulder);
+        }
+
+        .vehicle-detail-description {
+          font: 400 24px $miniserif;
+          text-transform: uppercase;
+          text-align: center;
+        }
+
+        .vehicle-detail-price {
+          font: 400 14px $minisans;
+        }
+      }
+    }
+
+    &__cta-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      row-gap: 10px;
+      z-index: 1;
+      margin: 25px 0 40px 0;
+      width: mini-grid-col(17);
+
+      .learn-more-cta,.search-inventory-cta{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .learn-more-cta {
+        color: palette(white, base);
+        background: palette(interface, websiteBlue);
+        border-color: palette(interface, websiteBlue);
+
+
+        &:hover {
+          color: palette(interface, websiteBlue);
+          background: transparent;
+        }
+      }
+
+      .search-inventory-cta {
+        background: palette(black, base);
+        border-color: palette(black, base);
+        color: palette(white, base);
+
+        &:hover {
+          color: palette(black, base);
+          background: transparent;
+        }
+      }
+    }
+
+  }
+
+  .hidden {
+    display: none;
+    opacity: 0;
+  }
+
+  .button-selected {
+    font-family: $minisansbold;
+    color: palette(black, base);
+    border-color: palette(interface, websiteBlue);
+  }
+
+  @include breakpoint-min($grid-width-small) {
+    &-content {
+
+      &__vehicle-view-toggle{
+        max-width:30%;
+      }
+    }
+  }
+
+  @include breakpoint-min($grid-width-large) {
+    display: flex;
+    flex-direction: row;
+    padding: 80px 0 80px 0;
+
+    &#{&}--after-interaction-mode{
+
+
+      #{$configuratorLite}{
+
+        &-content{
+          &__background-video{
+            display: block;
+            margin-top:0;
+          }
+        }
+      }
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .nav-button {
+      padding: 0;
+      border: none;
+      background: none;
+      text-transform: uppercase;
+      color: palette(interface, boulder);
+      font: 400 18px $minisans;
+      letter-spacing: 2.75px;
+      cursor: pointer;
+      width: unset;
+    }
+
+    &-header--mobile{
+      display:none;
+    }
+
+    &-header--desktop {
+      display: flex;
+      flex-direction:column;
+      position: absolute;
+      z-index: 1;
+      align-items: unset;
+      padding: 0;
+      width: 100%;
+      margin: 0;
+      top:0;
+      left:10%;
+
+      .heading-1 {
+        font: 400 14px $minisans;
+        color: palette(interface, boulder);
+        letter-spacing: 2.75px;
+        text-transform: uppercase;
+      }
+
+      .sub-heading {
+        font: 400 56px $miniserif;
+        margin-top:10px;
+        color: palette(black, base);
+      }
+    }
+
+    &-nav {
+      display: block;
+      align-items: unset;
+      height: unset;
+      background: transparent;
+      box-shadow: unset;
+      max-width:25%;
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 600px;
+        width: 100%;
+        padding: 60px 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        background: rgba(255, 255, 255, 0.9);
+
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+          backdrop-filter: blur(5px);
+          background: rgba(255, 255, 255, 0.7);
+        }
+
+        nav {
+          flex-direction: column;
+          width: 100%;
+
+          ul {
+            flex-direction: column;
+
+            li {
+              margin: 0 0 50px 0;
+              justify-content: right;
+              border-right: none;
+            }
+          }
+        }
+
+        a {
+          display: flex;
+          background: transparent;
+          color: palette(black, base);
+          width: 100%;
+          border: 2px solid palette(black, base);
+
+          &:hover {
+            background: palette(black, base);
+            color: palette(white, base);
+          }
+        }
+      }
+    }
+
+    &-content {
+      position:relative;
+      background: transparent;
+      width:75%;
+      $grandparent:&;
+
+      &__carousel-prev-button,&__carousel-next-button{
+
+        #{$grandparent}__icon-border{
+          width: 40px;
+          height: 40px;
+        }
+
+        #{$grandparent}__icon {
+          font-size: 1.2em;
+        }
+      }
+
+
+      &__interaction-area{
+        display:none;
+      }
+      &__interaction-area--desktop{
+        display:block;
+      }
+
+      &__background-video{
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        right:0;
+        margin:0 auto 0 auto;
+      }
+
+      &__background-video-wrapper{
+
+        height:100%;
+        position:relative;
+        width:auto;
+        margin:0 auto;
+      }
+
+      &__video{
+        position: relative;
+        height: 100%;
+        display:block;
+
+      }
+
+      &__video--mobile{
+        display:none;
+      }
+
+
+
+      &__vehicle-features {
+        width:40%;
+        position:absolute;
+        left:10%;
+        top:0;
+        padding:25px;
+        margin-top:0;
+      }
+
+      &__vehicle-features-list {
+        flex-direction: row;
+        flex-wrap: nowrap;
+      }
+
+      &__vehicle-details {
+
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        z-index: 1;
+        width:60%;
+        margin:0 auto;
+
+        .vehicle-details-container {
+          display: flex;
+          flex-direction: column;
+          row-gap: 10px;
+          color: palette(black, base);
+          align-items: start;
+
+          .vehicle-detail-heading {
+            font: 400 16px $minisans;
+            color:palette(interface,boulder);
+          }
+
+          .vehicle-detail-description {
+            font: 400 39px $miniserif;
+            text-transform: uppercase;
+            text-align: left;
+          }
+
+          .vehicle-detail-price {
+            font: 400 16px $minisans;
+          }
+        }
+      }
+
+      &__vehicle-view-toggle{
+        $parent:&;
+        position:absolute;
+        right:50px;
+        bottom:0;
+        width:20%;
+      }
+
+      &__cta-container {
+        margin: 0;
+        width:18%;
+        position:absolute;
+        top:0;
+        right:50px;
+        margin:0;
+      }
+
+    }
+
+    .hidden {
+      display: none;
+      opacity: 0;
+    }
+
+    .button-selected {
+      font-family: $minisansbold;
+      color: palette(black, base);
+      background: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 50%, palette(interface, websiteBlue) 50%);
+    }
+  }
+
+  @include breakpoint-min($grid-width-max) {
+
+    &-content {
+
+      &__vehicle-details {
+        width:auto;
+      }
+
+      &__vehicle-view-toggle{
+        max-width: 15%;
+
+      }
+
+      &__cta-container {
+        max-width:15%;
+      }
+
+    }
+
+    &-nav {
+      max-width: 17%;
+    }
+
+    &-content {
+      width: 83%;
+    }
+
+
+  }
+
+  @include breakpoint-min(map-get($breakpoints, "xxl")) {
+
+    &-content {
+
+      &__video{
+        object-fit: contain;
+      }
+
+    }
+  }
+
+
+}

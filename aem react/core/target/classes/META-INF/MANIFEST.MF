@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-Category: Enel Colombia
+Bundle-Description: Core bundle for Enel Colombia
+Bundle-ManifestVersion: 2
+Bundle-Name: Enel Colombia - Core
+Bundle-SymbolicName: enelcolombia.core
+Bundle-Version: 1.0.0.SNAPSHOT
+Import-Package: com.adobe.cq.export.json;version="[2.0,3)",com.fasterx
+ ml.jackson.annotation;version="[2.13,3)",org.apache.sling.api;version
+ ="[2.3,3)",org.apache.sling.api.resource;version="[2.13,3)",org.apach
+ e.sling.models.annotations;version="[1.5,2)",org.apache.sling.models.
+ annotations.injectorspecific;version="[1.1,2)",org.slf4j;version="[1.
+ 7,2)",javax.annotation;version="0.0.0"
+Private-Package: com.mercadolivre.core.models
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Sling-Model-Classes: com.mercadolivre.core.models.AdvanceSlide,com.mer
+ cadolivre.core.models.BannerModel,com.mercadolivre.core.models.Button
+

@@ -1,0 +1,4 @@
+#base=js
+colorPickerUI.js
+faq-validations.js
+

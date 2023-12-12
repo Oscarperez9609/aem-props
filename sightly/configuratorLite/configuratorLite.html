@@ -1,0 +1,218 @@
+<sly data-sly-use.placeholder="/apps/miniusa/components/templates/placeholder.html"
+     data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-use.configuratorLiteJS="configuratorLite.use.js"
+     data-sly-use.configuratorLiteModel="com.miniusa.core.models.sling.components.configuratorLite.ConfiguratorLiteModel">
+  ui.apps/src/main/content/jcr_root/apps/miniusa/components/media/configuratorLite
+  <!--/* Placeholder */-->
+  <sly
+          data-sly-call="${placeholder.placeholder @ isEmpty=wcmmode.edit, emptyTextAppend='Configurator Lite - Settings'}">
+  </sly>
+
+  <sly data-sly-call="${clientLib.css @ categories='miniusa.media.configuratorLite' , loader='m1'}"></sly>
+
+  <article id="configurator-lite-container" class="configurator-lite">
+    <section class="configurator-lite-header--mobile">
+      <h2 class="heading-1" data-sly-test="${properties.heading}">${properties.heading}</h2>
+      <h2 class="sub-heading" data-sly-test="${properties.subHeading}">${properties.subHeading}</h2>
+    </section>
+    <div class="configurator-lite-content-wrapper">
+
+      <article class="configurator-lite-carousel hidden">
+
+        <sly data-sly-list="${configuratorLiteModel.vehiclesMap.keySet.iterator}">
+            <sly data-sly-test="${item != 'allModels'}">
+              <sly data-sly-set.vehicle="${configuratorLiteModel.vehiclesMap[item]}">
+                <sly data-sly-repeat.vehicleBodyStyles="${vehicle.bodyStyles}">
+
+                  <ul class="configurator-lite-carousel__image-container" data-vehicle="${vehicle.name}">
+                    <li class="configurator-lite-carousel__slide"
+                        data-sly-test="item"
+                        data-sly-repeat.image="${configuratorLiteJS.vehiclesData[vehicle.name].interiorImages}"
+                        style="background: url(${image.path @ context='text'}) no-repeat center/cover;">
+
+                    </li>
+
+                  </ul>
+
+                </sly>
+              </sly>
+            </sly>
+          </sly>
+
+      </article>
+
+        <section class="configurator-lite-nav">
+          <div class="configurator-lite-nav__content">
+            <nav>
+              <ul>
+                <sly data-sly-list="${configuratorLiteModel.vehiclesMap.keySet.iterator}">
+                  <sly data-sly-test="${item != 'allModels'}">
+                    <sly data-sly-set.vehicle="${configuratorLiteModel.vehiclesMap[item]}"
+                        data-sly-use.modelToSnakeCase="${'com.miniusa.core.models.sling.utils.ToSnakeCase' @ text = vehicle.name}"
+                        data-sly-test.analyticEvent="${['configurator',modelToSnakeCase.text,modelToSnakeCase.text,'button'] @ join = '.'}">
+                        <sly data-sly-repeat.vehicleBodyStyles="${vehicle.bodyStyles}">
+                      <li data-order="${configuratorLiteJS.vehiclesData[vehicle.name].order}">
+                        <button data-model="${vehicle.name}" class="nav-button" analytics-on="true"
+                          analytics-event="${analyticEvent}" title="MINI ${vehicle.name}">
+                    ${vehicle.name}
+                  </button>
+                </li>
+                </sly>
+              </sly>
+            </sly>
+          </sly>
+        </ul>
+      </nav>
+
+      <a data-sly-test="${properties.showCompare}" class="configurator-lite-nav__cta"
+        href="${properties.comparePage @ context='text'}">${properties.comparePageCtaText}</a>
+
+    </div>
+</section>
+
+<section class="configurator-lite-content hidden">
+  <button class="configurator-lite-content__carousel-prev-button hidden">
+    <span class="configurator-lite-content__icon-border icon-border-circled icon-border-circled--white">
+      <i class="configurator-lite-content__icon icon-chevron--left"></i>
+    </span>
+  </button>
+  <button class="configurator-lite-content__carousel-next-button hidden">
+    <span class="configurator-lite-content__icon-border icon-border-circled icon-border-circled--white">
+      <i class="configurator-lite-content__icon icon-chevron--right"></i>
+    </span>
+  </button>
+
+
+  <div class="configurator-lite-content__interaction-area--desktop">
+  </div>
+
+
+  <div class="configurator-lite-header--desktop">
+    <h2 class="heading-1" data-sly-test="${properties.heading}">${properties.heading}</h2>
+    <h2 class="sub-heading" data-sly-test="${properties.subHeading}">${properties.subHeading}</h2>
+  </div>
+
+  <div
+          class="configurator-lite-content__vehicle-view-toggle configurator-lite-content__vehicle-view-toggle--dark">
+
+    <span class="configurator-lite-content__toggle-slider"></span>
+    <button data-view-mode="exterior" aria-label="Toggle exterior view" aria-pressed="true"
+            class="configurator-lite-content__toggle-button configurator-lite-content__toggle-button--selected" />
+    <span class="configurator-lite-content__toggle-button-text">${'Exterior' @ i18n}</span>
+    </button>
+
+
+    <button data-view-mode="interior" aria-label="Toggle interior view"
+            class="configurator-lite-content__toggle-button" />
+    <span class="configurator-lite-content__toggle-button-text">${'Interior' @ i18n}</span>
+    </button>
+
+  </div>
+
+  <div class="configurator-lite-content__vehicle-features">
+    <p class="configurator-lite-content__vehicle-features__title t-eyebrowHeadline--bold">
+      ${properties.featuresTitleText}
+    </p>
+
+    <sly data-sly-list="${configuratorLiteModel.vehiclesMap.keySet.iterator}">
+      <sly data-sly-test="${item != 'allModels'}">
+        <sly data-sly-set.vehicle="${configuratorLiteModel.vehiclesMap[item]}">
+          <sly data-sly-repeat.vehicleBodyStyles="${vehicle.bodyStyles}">
+
+            <ul class="configurator-lite-content__vehicle-features-list" data-vehicle="${vehicle.name}">
+
+              <li class="configurator-lite-content__vehicle-feature"
+                  data-sly-test="item"
+                  data-sly-repeat.feature="${configuratorLiteJS.vehiclesData[vehicle.name].features}">
+                <div class="configurator-lite-content__vehicle-feature__content">
+                  <p class="configurator-lite-content__vehicle-feature__content__text">${feature.text}</p>
+                </div>
+              </li>
+
+            </ul>
+
+          </sly>
+        </sly>
+      </sly>
+    </sly>
+
+
+  </div>
+
+  <article class="configurator-lite-content__background-video">
+
+    <div class="configurator-lite-content__interaction-area">
+    </div>
+
+    <sly data-sly-list="${configuratorLiteModel.vehiclesMap.keySet.iterator}">
+      <sly data-sly-test="${item != 'allModels'}">
+        <sly data-sly-set.vehicle="${configuratorLiteModel.vehiclesMap[item]}">
+          <sly data-sly-repeat.vehicleBodyStyles="${vehicle.bodyStyles}">
+
+
+            <div class="configurator-lite-content__background-video-wrapper" data-vehicle="${vehicle.name}">
+
+              <video muted class="configurator-lite-content__video" poster="${configuratorLiteJS.vehiclesData[vehicle.name].exteriorImage}">
+                <source src="${configuratorLiteJS.vehiclesData[vehicle.name].exteriorVideo}">
+              </video>
+              <video muted class="configurator-lite-content__video--mobile" poster="${configuratorLiteJS.vehiclesData[vehicle.name].exteriorImageMobile}">
+                <source src="${configuratorLiteJS.vehiclesData[vehicle.name].exteriorVideoMobile}" >
+              </video>
+
+            </div>
+          </sly>
+        </sly>
+      </sly>
+    </sly>
+
+  </article>
+
+  <div class="configurator-lite-content__vehicle-details">
+    <sly data-sly-list="${configuratorLiteModel.vehiclesMap.keySet.iterator}">
+      <sly data-sly-test="${item != 'allModels'}">
+        <sly data-sly-set.vehicle="${configuratorLiteModel.vehiclesMap[item]}">
+          <sly data-sly-repeat.vehicleBodyStyles="${vehicle.bodyStyles}">
+
+            <div data-vehicle="${vehicle.name}" class="vehicle-details-container">
+
+              <h3 class="vehicle-detail-heading t-eyebrowHeadline">${vehicleBodyStyles.displayName}</h3>
+              <h4 class="vehicle-detail-description" data-sly-test="${configuratorLiteJS.vehiclesData[vehicle.name].marketingText}">${configuratorLiteJS.vehiclesData[vehicle.name].marketingText}</h4>
+              <h4 class="vehicle-detail-description" data-sly-test="${!configuratorLiteJS.vehiclesData[vehicle.name].marketingText}">${vehicleBodyStyles.marketingText}</h4>
+
+                    <div class="vehicle-detail-pricing" data-sly-test="${configuratorLiteJS.vehiclesData[vehicle.name].showPrice}">${'Starting at' @ i18n} $${vehicleBodyStyles.seriesPreConfiguredBuild.price}</div>
+                  </div>
+                </sly>
+              </sly>
+            </sly>
+          </sly>
+        </div>
+
+        <sly data-sly-list="${configuratorLiteModel.vehiclesMap.keySet.iterator}">
+          <sly data-sly-test="${item != 'allModels'}">
+            <sly data-sly-set.vehicle="${configuratorLiteModel.vehiclesMap[item]}"
+                 data-sly-use.modelToSnakeCase="${'com.miniusa.core.models.sling.utils.ToSnakeCase' @ text = vehicle.name}"
+                 data-sly-test.learnMore="${['configurator',modelToSnakeCase.text,'learn-more','button'] @ join = '.'}"
+                 data-sly-test.buildyourOwn="${['configurator',modelToSnakeCase.text,'build-your-own','button'] @ join = '.'}">
+              <sly data-sly-repeat.vehicleBodyStyles="${vehicle.bodyStyles}">
+
+                <div data-vehicle="${vehicle.name}" class="configurator-lite-content__cta-container">
+                  <a class="learn-more-cta" role="button" href="/model/${vehicle.name}.html" target="_self" title="${vehicle.name} | MINI USA" tabindex="0" analytics-on="true" analytics-event="${learnMore}">
+                    Learn More
+                  </a>
+
+                  <a class="search-inventory-cta" role="button" href="/build-your-own.html#/studio/engine/${vehicle.name}/${vehicleBodyStyles.name}" target="_self" title="Build & Personalize Your MINI ${vehicle.name} | MINI USA" tabindex="0" analytics-on="true" analytics-event="${buildyourOwn}">
+                    Build Your Own
+                  </a>
+                </div>
+              </sly>
+            </sly>
+          </sly>
+        </sly>
+
+      </section>
+    </div>
+  </article>
+
+  <!--/* Clientlib */-->
+  <sly data-sly-call="${clientLib.js @ categories='miniusa.media.configuratorLite' , loader='m1'}"></sly>
+</sly>
